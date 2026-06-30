@@ -1,12 +1,25 @@
 @import 'tailwindcss';
 
-/* Tremendous uses a clean system/grotesk sans stack. */
+/* Tremendous design tokens (sampled from the real app). */
+@theme {
+  --color-brand: #2f5bff;
+  --color-brand-hover: #2348e0;
+  --color-brand-dark: #1f3fc4;
+  --color-sidebar: #12141c;
+  --color-sidebar-hover: #20232e;
+  --color-ink: #08060d;
+  --color-muted: #6b6375;
+  --color-line: #e5e4e7;
+  --color-canvas: #ffffff;
+}
+
 :root {
   font-family:
     -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: var(--color-ink);
 }
 
 body {
