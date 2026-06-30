@@ -1,4 +1,10 @@
-import { NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import {
+  NavLink,
+  Outlet,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom'
 import {
   Home,
   CreditCard,
@@ -9,6 +15,7 @@ import {
   Users,
   Contact as ContactIcon,
   ChevronDown,
+  ChevronRight,
   Search,
   MessageSquare,
   HelpCircle,
@@ -43,22 +50,36 @@ function TeamSwitcher() {
   )
 }
 
-interface NavItemProps {
+const ITEM =
+  'flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors'
+
+// A leaf nav row. Functional when `to` is set, decorative otherwise.
+// `expandable` adds a right chevron to mimic Tremendous's collapsible sections.
+function NavItem({
+  to,
+  icon,
+  label,
+  end,
+  expandable,
+}: {
   to?: string
   icon: ReactNode
   label: string
   end?: boolean
-}
+  expandable?: boolean
+}) {
+  const inner = (
+    <>
+      <span className="text-white/55">{icon}</span>
+      <span className="flex-1">{label}</span>
+      {expandable && <ChevronRight className="h-4 w-4 text-white/40" />}
+    </>
+  )
 
-function NavItem({ to, icon, label, end }: NavItemProps) {
-  const base =
-    'flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors'
   if (!to) {
-    // Decorative (non-functional) menu entry.
     return (
-      <div className={`${base} cursor-default text-white/70 hover:bg-sidebar-hover`}>
-        <span className="text-white/55">{icon}</span>
-        {label}
+      <div className={`${ITEM} cursor-default text-white/70 hover:bg-sidebar-hover`}>
+        {inner}
       </div>
     )
   }
@@ -67,22 +88,89 @@ function NavItem({ to, icon, label, end }: NavItemProps) {
       to={to}
       end={end}
       className={({ isActive }) =>
-        `${base} ${
+        `${ITEM} ${
           isActive
             ? 'bg-sidebar-hover font-medium text-white'
             : 'text-white/70 hover:bg-sidebar-hover'
         }`
       }
     >
-      <span className="text-white/55">{icon}</span>
+      {inner}
+    </NavLink>
+  )
+}
+
+// Indented child row inside an expanded group.
+function SubNavItem({
+  to,
+  label,
+}: {
+  to?: string
+  label: string
+}) {
+  const base =
+    'block rounded-md py-2 pr-3 pl-11 text-sm transition-colors'
+  if (!to) {
+    return (
+      <div className={`${base} cursor-default text-white/60 hover:bg-sidebar-hover`}>
+        {label}
+      </div>
+    )
+  }
+  return (
+    <NavLink
+      to={to}
+      className={({ isActive }) =>
+        `${base} ${
+          isActive
+            ? 'bg-sidebar-hover font-medium text-white'
+            : 'text-white/60 hover:bg-sidebar-hover'
+        }`
+      }
+    >
       {label}
     </NavLink>
   )
 }
 
+// Expandable parent (Orders & rewards) with a down/right chevron and children.
+function NavGroup({
+  icon,
+  label,
+  defaultOpen,
+  children,
+}: {
+  icon: ReactNode
+  label: string
+  defaultOpen?: boolean
+  children: ReactNode
+}) {
+  const [open, setOpen] = useState(!!defaultOpen)
+  return (
+    <div>
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className={`${ITEM} w-full text-white/70 hover:bg-sidebar-hover`}
+      >
+        <span className="text-white/55">{icon}</span>
+        <span className="flex-1 text-left">{label}</span>
+        {open ? (
+          <ChevronDown className="h-4 w-4 text-white/50" />
+        ) : (
+          <ChevronRight className="h-4 w-4 text-white/40" />
+        )}
+      </button>
+      {open && <div className="mt-0.5 flex flex-col gap-0.5">{children}</div>}
+    </div>
+  )
+}
+
 function Sidebar() {
   const navigate = useNavigate()
+  const location = useLocation()
   const ic = 'h-[18px] w-[18px]'
+  const ordersActive = location.pathname.startsWith('/history')
+
   return (
     <aside className="flex w-60 shrink-0 flex-col bg-sidebar">
       <Brand />
@@ -101,21 +189,35 @@ function Sidebar() {
       </div>
       <nav className="flex flex-1 flex-col gap-0.5 px-3">
         <NavItem to="/" end icon={<Home className={ic} />} label="Home" />
-        <NavItem
-          to="/history/orders"
+
+        <NavGroup
           icon={<CreditCard className={ic} />}
           label="Orders & rewards"
-        />
+          defaultOpen={ordersActive}
+        >
+          <SubNavItem label="Reward history" />
+          <SubNavItem to="/history/orders" label="Order history" />
+          <SubNavItem label="Analytics" />
+        </NavGroup>
+
         <NavItem
           to="/contacts"
           icon={<ContactIcon className={ic} />}
           label="Contacts"
         />
-        <NavItem icon={<DollarSign className={ic} />} label="Billing" />
-        <NavItem icon={<ShieldCheck className={ic} />} label="Fraud prevention" />
+        <NavItem icon={<DollarSign className={ic} />} label="Billing" expandable />
+        <NavItem
+          icon={<ShieldCheck className={ic} />}
+          label="Fraud prevention"
+          expandable
+        />
         <NavItem icon={<LayoutGrid className={ic} />} label="Campaigns" />
-        <NavItem icon={<FileText className={ic} />} label="Taxes" />
-        <NavItem icon={<Users className={ic} />} label="Team settings" />
+        <NavItem icon={<FileText className={ic} />} label="Taxes" expandable />
+        <NavItem
+          icon={<Users className={ic} />}
+          label="Team settings"
+          expandable
+        />
       </nav>
     </aside>
   )

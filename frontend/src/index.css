@@ -2,9 +2,9 @@
 
 /* Tremendous design tokens (sampled from the real app). */
 @theme {
-  --color-brand: #2f5bff;
-  --color-brand-hover: #2348e0;
-  --color-brand-dark: #1f3fc4;
+  --color-brand: #2563eb;
+  --color-brand-hover: #1d4ed8;
+  --color-brand-dark: #1e40af;
   --color-sidebar: #12141c;
   --color-sidebar-hover: #20232e;
   --color-ink: #08060d;
