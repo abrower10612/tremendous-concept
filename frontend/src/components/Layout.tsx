@@ -172,7 +172,7 @@ function Sidebar() {
   const ordersActive = location.pathname.startsWith('/history')
 
   return (
-    <aside className="flex w-60 shrink-0 flex-col bg-sidebar">
+    <aside className="flex w-64 shrink-0 flex-col bg-sidebar">
       <Brand />
       <TeamSwitcher />
       <div className="px-4 pb-4">

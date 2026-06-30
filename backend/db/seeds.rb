@@ -49,7 +49,9 @@ history = [
 ]
 
 history.each_with_index do |(public_id, order_type, dollars, date), i|
-  placed_at = Time.zone.parse("#{date} 13:#{format('%02d', i)}:00")
+  # Subtract i minutes so the array order is the display order (most recent
+  # first); earlier entries in the list sort above later ones within a day.
+  placed_at = Time.zone.parse("#{date} 13:00:00") - i.minutes
   order = Order.new(
     public_id: public_id,
     order_type: order_type,

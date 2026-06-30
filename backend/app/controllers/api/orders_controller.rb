@@ -63,6 +63,7 @@ module Api
         external_id: order.external_id,
         created_on: order.created_at.strftime("%b %-d, %Y"),
         created_at: order.created_at.iso8601,
+        created_by: order.placed_by_name,
       }
     end
 

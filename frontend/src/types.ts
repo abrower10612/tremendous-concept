@@ -28,6 +28,7 @@ export interface OrderSummary {
   external_id: string | null
   created_on: string
   created_at: string
+  created_by: string | null
 }
 
 export interface OrderDetail extends OrderSummary {
