@@ -1,0 +1,16 @@
+# Keep the build context small and reproducible.
+.git
+**/.DS_Store
+.claude/
+
+# Frontend
+frontend/node_modules
+frontend/dist
+
+# Backend (Ruby/Rails)
+backend/.bundle
+backend/tmp
+backend/log
+backend/storage/*.sqlite3
+backend/storage/*.sqlite3-*
+backend/node_modules

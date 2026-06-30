@@ -1,27 +1,30 @@
-# Seeds for the Tremendous concept app. Idempotent: clears and re-creates so
-# `bin/rails db:seed` always yields the same known state.
-
-puts "Clearing existing data..."
-Recipient.delete_all
-Order.delete_all
-Contact.delete_all
+# Seeds for the Tremendous concept app.
+#
+# IDEMPOTENT AND NON-DESTRUCTIVE: this only *ensures* the baseline demo data
+# exists. It never deletes, so re-running it (or a redeploy) never wipes data
+# a user created live. Existing records are left untouched.
 
 # ---------------------------------------------------------------------------
 # Contacts — the three saved people shown in the "Add from Contacts" flow.
 # ---------------------------------------------------------------------------
-puts "Seeding contacts..."
+puts "Ensuring contacts..."
 contacts = [
   { name: "John Doe",     email: "john.doe@example.com",     phone: "+1 (555) 010-1001" },
   { name: "Jane Doe",     email: "jane.doe@example.com",     phone: "+1 (555) 010-1002" },
   { name: "Mark Johnson", email: "mark.johnson@example.com", phone: "+1 (555) 010-1003" },
 ]
-contacts.each { |attrs| Contact.create!(attrs) }
+contacts.each do |attrs|
+  Contact.find_or_create_by!(email: attrs[:email]) do |c|
+    c.name = attrs[:name]
+    c.phone = attrs[:phone]
+  end
+end
 
 # ---------------------------------------------------------------------------
 # Order history — backdated orders so the history screen looks populated,
 # mirroring the reference screenshot (16 orders, mixed email / text).
 # ---------------------------------------------------------------------------
-puts "Seeding order history..."
+puts "Ensuring order history..."
 
 PLACED_BY_NAME  = "Jordan Avery"
 PLACED_BY_EMAIL = "admin@northwindlabs.com"
@@ -49,6 +52,8 @@ history = [
 ]
 
 history.each_with_index do |(public_id, order_type, dollars, date), i|
+  next if Order.exists?(public_id: public_id)
+
   # Subtract i minutes so the array order is the display order (most recent
   # first); earlier entries in the list sort above later ones within a day.
   placed_at = Time.zone.parse("#{date} 13:00:00") - i.minutes
@@ -74,4 +79,4 @@ history.each_with_index do |(public_id, order_type, dollars, date), i|
   order.save!
 end
 
-puts "Done. #{Contact.count} contacts, #{Order.count} orders, total $#{'%.2f' % (Order.sum(:total_cents) / 100.0)}."
+puts "Done. #{Contact.count} contacts, #{Order.count} orders."

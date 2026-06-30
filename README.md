@@ -23,7 +23,7 @@ for saved contacts.
 
 | Layer | Choice |
 |-------|--------|
-| Backend | Ruby on Rails 8 (API-only), SQLite, ActiveRecord |
+| Backend | Ruby on Rails 8 (API-only), ActiveRecord — SQLite locally, PostgreSQL in production |
 | Frontend | React 19 + TypeScript, Vite, Tailwind CSS v4 |
 | Data/state | TanStack Query (server state), React Router, axios |
 | Icons | lucide-react |
@@ -81,9 +81,14 @@ Order(public_id, order_type, status, campaign_name, products_included,
 
 ```bash
 cd backend
+bundle config set --local without 'production'  # skip pg; local dev uses SQLite
+bundle install
 bin/rails db:setup        # create, migrate, and seed
 bin/rails server          # http://localhost:3000
 ```
+
+> The `pg` (PostgreSQL) gem lives in the `:production` group, so local dev needs
+> no `libpq` — the line above skips it. Production installs it inside Docker.
 
 **Frontend** (terminal 2):
 
@@ -97,9 +102,31 @@ Open http://localhost:5173.
 
 ### Seed data
 
-`bin/rails db:seed` is idempotent and creates 3 contacts and 16 historical
-orders ($461.00 total) so Order History looks populated. Re-run it anytime to
-reset to a clean state.
+`bin/rails db:seed` is **idempotent and non-destructive** — it only *ensures*
+the baseline demo data exists (3 contacts + 16 historical orders, $461.00), and
+never deletes, so re-running it (or a redeploy) never wipes data created live.
+For a clean slate locally, use `bin/rails db:reset`.
+
+## Deployment (Railway)
+
+The whole stack deploys as **one Railway service**: a multi-stage `Dockerfile`
+builds the React app and the Rails API serves it from `public/` (same origin —
+no CORS), backed by **PostgreSQL** so data persists across redeploys.
+
+1. Push this repo (the single monorepo) to GitHub.
+2. On [Railway](https://railway.com): **New Project → Deploy from GitHub repo**.
+   Railway auto-detects the root `Dockerfile` and builds it.
+3. In the project, **New → Database → PostgreSQL**.
+4. On the web service, set **Variables**:
+   - `DATABASE_URL` → reference the database: `${{Postgres.DATABASE_URL}}`
+   - `SECRET_KEY_BASE` → a random secret (`cd backend && bin/rails secret`)
+5. Deploy. On boot the container runs `db:prepare` + the idempotent `db:seed`,
+   then serves on Railway's `$PORT`. Health check is `GET /up`.
+6. Generate a public domain from the service's **Settings → Networking**.
+
+The production image was built and verified locally against PostgreSQL,
+including a redeploy test confirming live-created orders survive and seed data
+is not duplicated.
 
 ## Notes
 
