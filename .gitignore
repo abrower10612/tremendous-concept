@@ -1,0 +1,10 @@
+# OS / editor
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# Claude Code tooling config (not part of the project deliverable)
+.claude/
+
+# Subprojects keep their own .gitignore (backend/, frontend/)
