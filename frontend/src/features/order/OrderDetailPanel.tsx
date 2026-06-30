@@ -113,7 +113,7 @@ export function OrderDetailPanel({
                   </span>
                 }
               />
-              <Row label="Team" value="Kaveotech" />
+              <Row label="Team" value="Northwind Labs" />
             </dl>
 
             {/* Payment info */}

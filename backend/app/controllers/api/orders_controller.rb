@@ -1,9 +1,9 @@
 module Api
   class OrdersController < ApplicationController
     # Fixed account context for this concept (single implied team/user).
-    PLACED_BY_NAME  = "Andrew Brower".freeze
-    PLACED_BY_EMAIL = "admin@kaveotech.com".freeze
-    DEFAULT_PAYMENT = "COASTAL COMMUNITY BANK *****6244".freeze
+    PLACED_BY_NAME  = "Jordan Avery".freeze
+    PLACED_BY_EMAIL = "admin@northwindlabs.com".freeze
+    DEFAULT_PAYMENT = "EVERGREEN FEDERAL BANK *****7731".freeze
 
     # GET /api/orders
     def index

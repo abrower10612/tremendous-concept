@@ -39,7 +39,7 @@ export function NewEmailOrderPage() {
 
       <div className="mx-auto max-w-5xl px-8 py-10">
         <h1 className="text-2xl font-semibold text-ink">New email order</h1>
-        <p className="mt-1 text-sm text-muted">Team: Kaveotech</p>
+        <p className="mt-1 text-sm text-muted">Team: Northwind Labs</p>
 
         <div
           className={`mt-8 grid grid-cols-1 gap-8 ${

@@ -11,9 +11,9 @@ Contact.delete_all
 # ---------------------------------------------------------------------------
 puts "Seeding contacts..."
 contacts = [
-  { name: "John Doe",     email: "example@gmail.com",  phone: "+1 (555) 010-1001" },
-  { name: "Jane Doe",     email: "example2@gmail.com", phone: "+1 (555) 010-1002" },
-  { name: "Mark Johnson", email: "example3@gmail.com", phone: "+1 (555) 010-1003" },
+  { name: "John Doe",     email: "john.doe@example.com",     phone: "+1 (555) 010-1001" },
+  { name: "Jane Doe",     email: "jane.doe@example.com",     phone: "+1 (555) 010-1002" },
+  { name: "Mark Johnson", email: "mark.johnson@example.com", phone: "+1 (555) 010-1003" },
 ]
 contacts.each { |attrs| Contact.create!(attrs) }
 
@@ -23,9 +23,9 @@ contacts.each { |attrs| Contact.create!(attrs) }
 # ---------------------------------------------------------------------------
 puts "Seeding order history..."
 
-PLACED_BY_NAME  = "Andrew Brower"
-PLACED_BY_EMAIL = "admin@kaveotech.com"
-PAYMENT_LABEL   = "COASTAL COMMUNITY BANK *****6244"
+PLACED_BY_NAME  = "Jordan Avery"
+PLACED_BY_EMAIL = "admin@northwindlabs.com"
+PAYMENT_LABEL   = "EVERGREEN FEDERAL BANK *****7731"
 CAMPAIGN        = "Generic Thank You"
 
 # [public_id, order_type, dollars, date]

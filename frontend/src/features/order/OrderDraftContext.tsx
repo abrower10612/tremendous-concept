@@ -40,7 +40,7 @@ export function OrderDraftProvider({ children }: { children: ReactNode }) {
     const subtotalCents = recipients.reduce((sum, r) => sum + r.amount_cents, 0)
     return {
       campaignName: 'Generic Thank You',
-      paymentLabel: 'COASTAL COMMUNITY BANK *****6244',
+      paymentLabel: 'EVERGREEN FEDERAL BANK *****7731',
       recipients,
       externalId,
       subtotalCents,
