@@ -6,14 +6,17 @@ function OptionRow({
   label,
   onClick,
   enabled,
+  dataTour,
 }: {
   label: string
   onClick?: () => void
   enabled?: boolean
+  dataTour?: string
 }) {
   return (
     <button
       onClick={onClick}
+      data-tour={dataTour}
       className={`flex w-full items-center justify-between rounded-xl border border-line bg-white px-5 py-4 text-left transition-shadow ${
         enabled ? 'hover:shadow-sm' : 'cursor-default'
       }`}
@@ -74,6 +77,7 @@ export function SendRewardsPage() {
           <OptionRow
             label="Send via email"
             enabled
+            dataTour="send-via-email"
             onClick={() => navigate('/order/new')}
           />
           <OptionRow label="Send via text message" />

@@ -56,7 +56,10 @@ export function OrderDetailPanel({
             </p>
 
             {justPlaced && (
-              <div className="mt-4 flex items-center gap-2 rounded-lg bg-green-50 px-4 py-3 text-sm font-medium text-green-700">
+              <div
+                data-tour="order-placed"
+                className="mt-4 flex items-center gap-2 rounded-lg bg-green-50 px-4 py-3 text-sm font-medium text-green-700"
+              >
                 <CheckCircle2 className="h-5 w-5" />
                 Your order was placed
               </div>

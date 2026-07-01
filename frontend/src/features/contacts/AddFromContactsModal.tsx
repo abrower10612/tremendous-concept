@@ -68,6 +68,7 @@ export function AddFromContactsModal({
             Cancel
           </button>
           <button
+            data-tour="add-selected"
             onClick={addSelected}
             disabled={selected.size === 0}
             className="rounded-md bg-brand px-5 py-2 text-sm font-semibold text-white hover:bg-brand-hover disabled:opacity-50"
@@ -101,7 +102,10 @@ export function AddFromContactsModal({
           .
         </div>
       ) : (
-        <ul className="max-h-72 divide-y divide-line overflow-y-auto rounded-md border border-line">
+        <ul
+          data-tour="contacts-list"
+          className="max-h-72 divide-y divide-line overflow-y-auto rounded-md border border-line"
+        >
           {contacts.map((c) => (
             <li key={c.id}>
               <label className="flex cursor-pointer items-center gap-3 px-4 py-3 hover:bg-gray-50">

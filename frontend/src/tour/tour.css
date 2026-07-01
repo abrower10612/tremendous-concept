@@ -1,0 +1,109 @@
+/* Themed driver.js popover — light, matching the Tremendous look. */
+.driver-popover.app-tour {
+  background: #fff;
+  color: #08060d;
+  border: 1px solid #e5e4e7;
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
+  max-width: 320px;
+  padding: 16px;
+  font-family: inherit;
+}
+.driver-popover.app-tour .driver-popover-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #08060d;
+}
+.driver-popover.app-tour .driver-popover-description {
+  margin-top: 5px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #6b6375;
+}
+.driver-popover.app-tour .driver-popover-progress-text {
+  font-size: 11px;
+  color: #9a94a3;
+}
+.driver-popover.app-tour .driver-popover-close-btn {
+  color: #9a94a3;
+}
+.driver-popover.app-tour .driver-popover-close-btn:hover {
+  color: #08060d;
+}
+.driver-popover.app-tour .driver-popover-navigation-btns button {
+  text-shadow: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 12px;
+}
+.driver-popover.app-tour .driver-popover-next-btn {
+  background: #2563eb;
+  color: #fff;
+  border: 1px solid transparent;
+}
+.driver-popover.app-tour .driver-popover-next-btn:hover {
+  background: #1d4ed8;
+}
+.driver-popover.app-tour .driver-popover-prev-btn {
+  background: #fff;
+  color: #6b6375;
+  border: 1px solid #e5e4e7;
+}
+.driver-popover.app-tour .driver-popover-prev-btn:hover {
+  background: #f4f4f5;
+  color: #08060d;
+}
+/* Arrow color matches the white popover. */
+.driver-popover.app-tour .driver-popover-arrow-side-top {
+  border-top-color: #fff;
+}
+.driver-popover.app-tour .driver-popover-arrow-side-bottom {
+  border-bottom-color: #fff;
+}
+.driver-popover.app-tour .driver-popover-arrow-side-left {
+  border-left-color: #fff;
+}
+.driver-popover.app-tour .driver-popover-arrow-side-right {
+  border-right-color: #fff;
+}
+
+/* Floating replay button. */
+.tour-fab {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 9999px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.5);
+  animation: tour-glow 2s ease-out infinite;
+  transition: transform 0.15s ease;
+}
+.tour-fab:hover {
+  transform: scale(1.05);
+}
+@keyframes tour-glow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.5), 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 12px rgba(37, 99, 235, 0), 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tour-fab {
+    animation: none;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+}

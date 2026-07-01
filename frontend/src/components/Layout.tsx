@@ -177,6 +177,7 @@ function Sidebar({ open, onClose }: { open: boolean; onClose: () => void }) {
       <TeamSwitcher />
       <div className="px-4 pb-4">
         <button
+          data-tour="send-rewards"
           onClick={() => navigate('/send-rewards')}
           className="w-full rounded-md bg-brand py-2 text-sm font-semibold text-white hover:bg-brand-hover"
         >
@@ -229,6 +230,7 @@ function Topbar({ onMenu }: { onMenu: () => void }) {
       <button
         onClick={onMenu}
         aria-label="Open menu"
+        data-tour="menu"
         className="text-muted hover:text-ink lg:hidden"
       >
         <Menu className="h-6 w-6" />

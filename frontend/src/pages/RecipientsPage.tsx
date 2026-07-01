@@ -59,6 +59,7 @@ export function RecipientsPage() {
           <h1 className="text-2xl font-semibold text-ink sm:text-[28px]">Recipients</h1>
           <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             <button
+              data-tour="add-from-contacts"
               onClick={() => setPickerOpen(true)}
               className="rounded-md border border-line px-4 py-2 text-sm font-medium hover:bg-gray-50"
             >
@@ -167,6 +168,7 @@ export function RecipientsPage() {
 
         {draft.recipients.length > 0 && (
           <button
+            data-tour="continue"
             onClick={() => navigate('/order/new')}
             className="mt-auto w-fit rounded-md bg-brand px-6 py-2.5 text-sm font-semibold text-white hover:bg-brand-hover"
           >

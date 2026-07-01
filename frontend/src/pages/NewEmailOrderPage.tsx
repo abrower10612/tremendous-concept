@@ -109,6 +109,7 @@ export function NewEmailOrderPage() {
                 </button>
               ) : (
                 <button
+                  data-tour="add-recipients"
                   onClick={() => navigate('/order/new/recipients')}
                   className="rounded-md border border-line px-4 py-2 text-sm font-medium hover:bg-gray-50"
                 >
@@ -177,6 +178,7 @@ export function NewEmailOrderPage() {
               </label>
 
               <button
+                data-tour="place-order"
                 onClick={() => setConfirmOpen(true)}
                 className="mt-4 w-full rounded-md bg-brand py-2.5 text-sm font-semibold text-white hover:bg-brand-hover"
               >

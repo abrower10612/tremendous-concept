@@ -7,6 +7,7 @@ import { NewEmailOrderPage } from './pages/NewEmailOrderPage'
 import { RecipientsPage } from './pages/RecipientsPage'
 import { OrderHistoryPage } from './pages/OrderHistoryPage'
 import { ContactsPage } from './pages/ContactsPage'
+import { Tour } from './tour/Tour'
 
 // The order-placement flow is full-screen (its own header) and shares a draft.
 function OrderFlowLayout() {
@@ -19,21 +20,26 @@ function OrderFlowLayout() {
 
 function App() {
   return (
-    <Routes>
-      {/* App-shell pages (sidebar + topbar) */}
-      <Route element={<Layout />}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/send-rewards" element={<SendRewardsPage />} />
-        <Route path="/history/orders" element={<OrderHistoryPage />} />
-        <Route path="/contacts" element={<ContactsPage />} />
-      </Route>
+    <>
+      <Routes>
+        {/* App-shell pages (sidebar + topbar) */}
+        <Route element={<Layout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/send-rewards" element={<SendRewardsPage />} />
+          <Route path="/history/orders" element={<OrderHistoryPage />} />
+          <Route path="/contacts" element={<ContactsPage />} />
+        </Route>
 
-      {/* Full-screen order flow */}
-      <Route element={<OrderFlowLayout />}>
-        <Route path="/order/new" element={<NewEmailOrderPage />} />
-        <Route path="/order/new/recipients" element={<RecipientsPage />} />
-      </Route>
-    </Routes>
+        {/* Full-screen order flow */}
+        <Route element={<OrderFlowLayout />}>
+          <Route path="/order/new" element={<NewEmailOrderPage />} />
+          <Route path="/order/new/recipients" element={<RecipientsPage />} />
+        </Route>
+      </Routes>
+
+      {/* Guided product tour — persists across routes, so it can drive the flow. */}
+      <Tour />
+    </>
   )
 }
 

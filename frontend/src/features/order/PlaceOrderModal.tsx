@@ -34,6 +34,7 @@ export function PlaceOrderModal({
             Go back
           </button>
           <button
+            data-tour="confirm-order"
             onClick={onConfirm}
             disabled={placing}
             className="rounded-md bg-brand px-5 py-2 text-sm font-semibold text-white hover:bg-brand-hover disabled:opacity-60"
