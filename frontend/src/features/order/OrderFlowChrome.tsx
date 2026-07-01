@@ -25,7 +25,7 @@ export function OrderFlowHeader() {
   const navigate = useNavigate()
   const draft = useOrderDraft()
   return (
-    <header className="flex h-16 items-center justify-between border-b border-line px-8">
+    <header className="flex h-16 items-center justify-between border-b border-line px-4 sm:px-8">
       <span className="text-[15px] font-medium text-ink">New email order</span>
       <button
         onClick={() => {

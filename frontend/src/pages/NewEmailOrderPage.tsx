@@ -37,7 +37,7 @@ export function NewEmailOrderPage() {
     <div className="min-h-screen bg-white">
       <OrderFlowHeader />
 
-      <div className="mx-auto max-w-5xl px-8 py-10">
+      <div className="mx-auto max-w-5xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
         <h1 className="text-2xl font-semibold text-ink">New email order</h1>
         <p className="mt-1 text-sm text-muted">Team: Northwind Labs</p>
 
@@ -47,9 +47,9 @@ export function NewEmailOrderPage() {
           }`}
         >
           {/* Builder card */}
-          <div className="rounded-xl border border-line bg-white p-6">
+          <div className="rounded-xl border border-line bg-white p-4 sm:p-6">
             {/* Campaign */}
-            <div className="flex items-start justify-between pb-5">
+            <div className="flex flex-col gap-3 pb-5 sm:flex-row sm:items-start sm:justify-between">
               <div className="flex gap-3">
                 <StepCheck />
                 <div>
@@ -71,7 +71,7 @@ export function NewEmailOrderPage() {
             <div className="border-t border-line" />
 
             {/* Recipients */}
-            <div className="flex items-start justify-between py-5">
+            <div className="flex flex-col gap-3 py-5 sm:flex-row sm:items-start sm:justify-between">
               <div className="flex gap-3">
                 {hasRecipients ? <StepCheck /> : <StepCircle n={2} />}
                 <div>
@@ -120,7 +120,7 @@ export function NewEmailOrderPage() {
             <div className="border-t border-line" />
 
             {/* Payment */}
-            <div className="flex items-center justify-between pt-5">
+            <div className="flex flex-col gap-3 pt-5 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex items-center gap-3">
                 <StepCheck />
                 <h3 className="font-semibold text-ink">Payment method</h3>

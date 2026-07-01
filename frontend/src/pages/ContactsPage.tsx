@@ -61,8 +61,8 @@ export function ContactsPage() {
   }
 
   return (
-    <div className="mx-auto max-w-5xl px-8 py-8">
-      <div className="flex items-center justify-between">
+    <div className="mx-auto max-w-5xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-semibold text-ink">Contacts</h1>
           <p className="mt-1 text-sm text-muted">
@@ -71,14 +71,15 @@ export function ContactsPage() {
         </div>
         <button
           onClick={openAdd}
-          className="flex items-center gap-2 rounded-md bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-brand-hover"
+          className="flex w-fit items-center gap-2 rounded-md bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-brand-hover"
         >
           <Plus className="h-4 w-4" /> Add contact
         </button>
       </div>
 
       <div className="mt-6 overflow-hidden rounded-xl border border-line">
-        <table className="w-full text-sm">
+        <div className="overflow-x-auto">
+        <table className="w-full min-w-[600px] text-sm">
           <thead>
             <tr className="border-b border-line bg-gray-50 text-left text-xs font-medium text-muted">
               <th className="px-4 py-3">Name</th>
@@ -145,6 +146,7 @@ export function ContactsPage() {
             )}
           </tbody>
         </table>
+        </div>
       </div>
 
       <ContactFormModal

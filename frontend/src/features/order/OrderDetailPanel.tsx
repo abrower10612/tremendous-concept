@@ -37,7 +37,7 @@ export function OrderDetailPanel({
         {!order ? (
           <div className="p-6 text-sm text-muted">Loading…</div>
         ) : (
-          <div className="p-6">
+          <div className="p-4 sm:p-6">
             {/* Header */}
             <div className="flex items-start justify-between">
               <span className="rounded bg-green-100 px-2 py-0.5 text-xs font-semibold text-green-700 capitalize">

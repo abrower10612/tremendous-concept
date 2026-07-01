@@ -42,16 +42,16 @@ export function OrderHistoryPage() {
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-8 py-8">
-      <h1 className="text-[28px] font-semibold text-ink">Order history</h1>
+    <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+      <h1 className="text-2xl font-semibold text-ink sm:text-[28px]">Order history</h1>
 
       {/* Tabs */}
-      <div className="mt-4 flex gap-6 border-b border-line">
+      <div className="mt-4 flex gap-6 overflow-x-auto border-b border-line">
         {TABS.map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`-mb-px border-b-2 pb-3 text-sm ${
+            className={`-mb-px shrink-0 border-b-2 pb-3 text-sm whitespace-nowrap ${
               activeTab === tab
                 ? 'border-brand font-medium text-ink'
                 : 'border-transparent text-muted hover:text-ink'
@@ -65,12 +65,12 @@ export function OrderHistoryPage() {
       {/* Card: filter bar + count + table */}
       <div className="mt-4 overflow-hidden rounded-xl border border-line">
         {/* Filter bar */}
-        <div className="flex items-center gap-3 px-4 py-3">
-          <div className="relative">
+        <div className="flex flex-wrap items-center gap-3 px-4 py-3">
+          <div className="relative w-full sm:w-auto">
             <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted" />
             <input
               placeholder="Search ID or buyer"
-              className="w-64 rounded-md border border-line py-2 pr-3 pl-9 text-sm focus:border-brand focus:outline-none"
+              className="w-full rounded-md border border-line py-2 pr-3 pl-9 text-sm focus:border-brand focus:outline-none sm:w-64"
             />
           </div>
           <span className="text-sm text-muted">Created at</span>
@@ -96,8 +96,9 @@ export function OrderHistoryPage() {
           </span>
         </div>
 
-        {/* Table */}
-        <table className="w-full text-sm">
+        {/* Table (scrolls horizontally on small screens) */}
+        <div className="overflow-x-auto">
+        <table className="w-full min-w-[880px] text-sm">
           <thead>
             <tr className="border-y border-line bg-gray-50 text-left text-xs text-muted">
               <th className="px-4 py-3 font-medium">Order ID</th>
@@ -137,6 +138,7 @@ export function OrderHistoryPage() {
             ))}
           </tbody>
         </table>
+        </div>
       </div>
 
       <OrderDetailPanel

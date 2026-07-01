@@ -50,7 +50,7 @@ export function HomePage() {
   const ic = 'h-5 w-5'
 
   return (
-    <div className="mx-auto max-w-6xl px-8 py-8">
+    <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
       <div className="grid grid-cols-1 gap-x-10 gap-y-8 lg:grid-cols-[1fr_360px]">
         {/* Left: history + team settings */}
         <div>

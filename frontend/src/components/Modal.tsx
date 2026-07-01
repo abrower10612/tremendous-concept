@@ -27,7 +27,7 @@ export function Modal({
         aria-hidden
       />
       <div
-        className={`relative z-10 w-full ${width} rounded-xl bg-white p-6 shadow-xl`}
+        className={`relative z-10 max-h-[90vh] w-full overflow-y-auto ${width} rounded-xl bg-white p-5 shadow-xl sm:p-6`}
       >
         <div className="flex items-start justify-between">
           <h2 className="text-xl font-semibold text-ink">{title}</h2>

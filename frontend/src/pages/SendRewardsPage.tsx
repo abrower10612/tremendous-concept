@@ -61,7 +61,7 @@ function ProductBlock({
 export function SendRewardsPage() {
   const navigate = useNavigate()
   return (
-    <div className="mx-auto max-w-5xl px-8 py-8">
+    <div className="mx-auto max-w-5xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
       <h1 className="text-2xl font-semibold text-ink">Send rewards</h1>
 
       <div className="mt-2 divide-y divide-line">

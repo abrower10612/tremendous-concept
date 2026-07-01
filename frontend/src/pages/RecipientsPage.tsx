@@ -40,7 +40,7 @@ export function RecipientsPage() {
   return (
     <div className="flex min-h-screen flex-col bg-white">
       {/* Header */}
-      <header className="flex h-16 items-center justify-between border-b border-line px-8">
+      <header className="flex h-16 items-center justify-between border-b border-line px-4 sm:px-8">
         <span className="text-[15px] text-ink">
           <span className="font-medium underline">New email order</span>
           <span className="mx-2 text-muted">&rsaquo;</span>
@@ -54,10 +54,10 @@ export function RecipientsPage() {
         </button>
       </header>
 
-      <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col px-6 pt-10 pb-16">
-        <div className="flex items-center justify-between">
-          <h1 className="text-[28px] font-semibold text-ink">Recipients</h1>
-          <div className="flex items-center gap-3">
+      <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col px-4 pt-8 pb-12 sm:px-6 sm:pt-10 sm:pb-16">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <h1 className="text-2xl font-semibold text-ink sm:text-[28px]">Recipients</h1>
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             <button
               onClick={() => setPickerOpen(true)}
               className="rounded-md border border-line px-4 py-2 text-sm font-medium hover:bg-gray-50"
@@ -94,6 +94,10 @@ export function RecipientsPage() {
               </button>
             )}
           </div>
+
+          {/* Table body scrolls horizontally on small screens */}
+          <div className="overflow-x-auto">
+          <div className="min-w-[800px]">
 
           {/* Column headers (gray) */}
           <div
@@ -157,6 +161,8 @@ export function RecipientsPage() {
               </button>
             </div>
           ))}
+          </div>
+          </div>
         </div>
 
         {draft.recipients.length > 0 && (
