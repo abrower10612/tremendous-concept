@@ -1,4 +1,5 @@
 require "active_support/core_ext/integer/time"
+require "securerandom"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -27,6 +28,11 @@ Rails.application.configure do
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = true
+
+  # Prefer SECRET_KEY_BASE from the environment; if it isn't set, fall back to a
+  # generated secret so this concept deploy never hard-crashes at boot. There are
+  # no real user sessions here, so an ephemeral per-boot secret is acceptable.
+  config.secret_key_base = ENV["SECRET_KEY_BASE"].presence || SecureRandom.hex(64)
 
   # Skip http-to-https redirect for the default health check endpoint.
   # config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
